@@ -1,0 +1,32 @@
+<div style="padding: 2rem; max-width: 900px; margin: auto;">
+    <a mat-button [routerLink]="['/']">
+        <mat-icon>arrow_back</mat-icon>
+        Volver al Directorio
+    </a>
+
+    <div *ngIf="veterinario; else cargando">
+        <header style="text-align: center; margin: 2rem 0;">
+        <h1 style="margin-bottom: 0.5rem;">{{ veterinario.nombre_completo }}</h1>
+        <p>Cédula Profesional: {{ veterinario.cedula_profesional }}</p>
+        </header>
+
+        <section *ngIf="veterinario.especialidades.length > 0" style="margin-bottom: 2rem;">
+        <h2>Especialidades</h2>
+        <mat-chip-listbox>
+            <mat-chip *ngFor="let e of veterinario.especialidades" color="primary" selected>{{ e.nombre }}</mat-chip>
+        </mat-chip-listbox>
+        </section>
+
+        <section *ngIf="veterinario.ubicaciones.length > 0">
+        <h2>Ubicaciones</h2>
+        <mat-card *ngFor="let u of veterinario.ubicaciones" style="margin-bottom: 1rem;">
+            <mat-card-header>
+            <mat-card-title>{{ u.nombre_clinica }}</mat-card-title>
+            <mat-card-subtitle>{{ u.calle_numero }}, {{ u.colonia }}, {{ u.ciudad }}</mat-card-subtitle>
+            </mat-card-header>
+            </mat-card>
+        </section>
+    </div>
+
+    <ng-template #cargando><p>Cargando perfil...</p></ng-template>
+</div>

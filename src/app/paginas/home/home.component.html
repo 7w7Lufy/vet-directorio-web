@@ -1,0 +1,236 @@
+<div class="admin-panel-container">
+
+    <header class="admin-header">
+        <h1 *ngIf="isAdmin">Panel de administrador</h1>
+        <h1 *ngIf="!isAdmin">Bienvenido, {{ userEmail }}</h1>
+        <div class="header-buttons">
+        <ng-container *ngIf="isAdmin">
+            <a mat-button color="primary" [routerLink]="['/admin/especialidades']">Gestionar Especialidades</a>
+            <a mat-button color="primary" [routerLink]="['/admin/ubicaciones']">Gestionar Ubicaciones</a>
+        </ng-container>
+        </div>
+    </header>
+
+    <hr class="divider" style="margin: 2rem 0;">
+
+    <mat-card class="add-vet-container" *ngIf="isAdmin">
+        <mat-card-header>
+        <mat-card-title>Agregar nuevo Medico veterinario</mat-card-title>
+        </mat-card-header>
+        <mat-card-content class="add-vet-content">
+
+        <form (ngSubmit)="agregarVeterinario()" class="vet-form-fields">
+
+            <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Usuario Asociado*</mat-label>
+            <mat-select name="usuario_id" [(ngModel)]="nuevoVeterinario.usuario_id" required>
+                <mat-option *ngFor="let user of usuariosDisponibles" [value]="user.id">
+                {{ user.email }} ({{ user.rol }})
+                </mat-option>
+            </mat-select>
+            <mat-error *ngIf="!nuevoVeterinario.usuario_id">Debes seleccionar un usuario.</mat-error>
+            </mat-form-field>
+            <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Nombre Completo*</mat-label>
+            <input matInput name="nombre" [(ngModel)]="nuevoVeterinario.nombre_completo" required>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Cédula Profesional*</mat-label>
+            <input matInput name="cedula" [(ngModel)]="nuevoVeterinario.cedula_profesional">
+            </mat-form-field>
+
+            <button mat-flat-button type="submit" class="agregar-button">Agregar Perfil Veterinario</button>
+        </form>
+
+        <li *ngFor="let vet of veterinarios" class="vet-list-item">
+        <div class="vet-info-and-photo"> 
+            <div class="vet-list-photo">
+            <label class="photo-circle-small" [for]="'photo-upload-' + vet.id">
+                <img *ngIf="vet.foto_perfil_url && uploadingPhotoVetId !== vet.id" [src]="vet.foto_perfil_url" alt="Foto de {{vet.nombre_completo}}">
+                <img *ngIf="previewImageUrl && uploadingPhotoVetId === vet.id" [src]="previewImageUrl" alt="Vista previa">
+                <mat-icon *ngIf="!vet.foto_perfil_url && !(previewImageUrl && uploadingPhotoVetId === vet.id)">person</mat-icon>
+                <input [id]="'photo-upload-' + vet.id" type="file" (change)="onFileSelected($event, vet.id)" accept="image/*" class="photo-input-hidden">
+            </label>
+            </div>
+            <div class="vet-data">
+            <h3>{{ vet.nombre_completo }}</h3>
+            <p>Cédula Profesional: {{ vet.cedula_profesional }}</p>
+            </div>
+        </div>
+        <div *ngIf="isAdmin" class="vet-list-actions">
+            <button mat-icon-button color="primary" (click)="seleccionarParaEditar(vet)">
+            <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminarVeterinario(vet.id)">
+            <mat-icon>delete</mat-icon>
+            </button>
+        </div>
+        </li>
+
+        </mat-card-content>
+    </mat-card>
+
+    <div class="listado-container">
+        <h2>Listado actual (vista administrador)</h2>
+        <hr class="divider">
+
+        <mat-card *ngIf="vetParaEditar && isAdmin" class="edit-vet-container" style="margin-bottom: 2rem; background-color: #f0f0f0;">
+        <mat-card-title style="padding: 1rem 1rem 0 1rem;">Editando a: {{ vetParaEditar.nombre_completo }}</mat-card-title>
+        
+        
+        <mat-card-content style="padding: 1rem;">
+            <form (ngSubmit)="actualizarVeterinario()">
+                <mat-form-field appearance="outline" style="width: 100%;">
+                    <mat-label>Nombre Completo</mat-label>
+                    <input matInput name="edit-nombre" [(ngModel)]="vetParaEditar.nombre_completo" required>
+                </mat-form-field>
+                <mat-form-field appearance="outline" style="width: 100%; margin-top: 1rem;">
+                    <mat-label>Cédula Profesional</mat-label>
+                    <input matInput name="edit-cedula" [(ngModel)]="vetParaEditar.cedula_profesional">
+                </mat-form-field>
+
+
+                <hr style="margin: 1.5rem 0;">
+                <h4>Gestionar Estudios</h4>
+
+                <div style="margin-bottom: 1.5rem;">
+                <strong>Estudios Registrados:</strong>
+                <ul *ngIf="estudiosAsignados.length > 0; else noEstudiosReg">
+                    <li *ngFor="let est of estudiosAsignados" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; font-size: 0.9em;">
+                    <span>
+                        <strong>{{ est.nivel_estudio }}:</strong> {{ est.titulo_obtenido }} 
+                        <em>({{ est.institucion }}{{ est.ano_graduacion ? ', ' + est.ano_graduacion : '' }})</em> 
+                    </span>
+                    <button mat-icon-button color="warn" type="button" (click)="onEliminarEstudio(est.id)">
+                        <mat-icon>delete_outline</mat-icon>
+                    </button>
+                    </li>
+                </ul>
+                <ng-template #noEstudiosReg>
+                    <p style="font-style: italic; margin-top: 0.5rem; font-size: 0.9em;">Ninguno registrado.</p>
+                </ng-template>
+                </div>
+
+
+                <div style="background-color: #f8f9fa; padding: 1rem; border-radius: 8px;">
+                <strong>Agregar Nuevo Estudio:</strong>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 1rem;">
+                    <mat-form-field appearance="outline">
+                    <mat-label>Nivel de Estudio*</mat-label>
+                    <mat-select name="nivel_estudio_id" [(ngModel)]="nuevoEstudio.nivel_estudio_id" required>
+                        <mat-option *ngFor="let nivel of nivelesEstudio" [value]="nivel.id">
+                        {{ nivel.nombre }}
+                        </mat-option>
+                    </mat-select>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                    <mat-label>Institución*</mat-label>
+                    <input matInput name="institucion" [(ngModel)]="nuevoEstudio.institucion" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                    <mat-label>Título Obtenido*</mat-label>
+                    <input matInput name="titulo_obtenido" [(ngModel)]="nuevoEstudio.titulo_obtenido" required>
+                    </mat-form-field>
+                    <mat-form-field appearance="outline">
+                    <mat-label>Año Graduación</mat-label>
+                    <input matInput type="number" name="ano_graduacion" [(ngModel)]="nuevoEstudio.ano_graduacion">
+                    </mat-form-field>
+                </div>
+                <button mat-stroked-button color="primary" type="button" (click)="onAgregarEstudio()" style="margin-top: 1rem;">
+                    Agregar Estudio
+                </button>
+                </div>
+
+
+
+                <mat-form-field appearance="outline" style="width: 100%; margin-top: 1rem;">
+                    <mat-label>Costo de Consulta (MXN)</mat-label>
+                    <input matInput type="number" name="edit-costo" [(ngModel)]="vetParaEditar.costo_consulta" placeholder="Ej: 450.00">
+                    <span matTextPrefix>$&nbsp;</span>
+                </mat-form-field>
+
+                <div style="margin-top: 1rem; margin-bottom: 1rem;">
+                <mat-slide-toggle name="edit-urgencias" [(ngModel)]="vetParaEditar.acepta_urgencias">
+                    ¿Acepta Urgencias?
+                </mat-slide-toggle>
+                </div>
+
+            </form>
+                <mat-card-actions align="end" style="padding: 0 1rem 1rem 1rem;">
+                <button mat-button (click)="vetParaEditar = null">Cancelar</button>
+                <button mat-flat-button color="primary" (click)="actualizarVeterinario()">Guardar Cambios Básicos</button> 
+            </mat-card-actions>
+            
+
+
+            <hr style="margin: 1.5rem 0;">
+            <h4>Asignar Ubicación</h4>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <mat-form-field appearance="outline" style="flex-grow: 1;">
+                    <mat-label>Selecciona una clínica...</mat-label>
+                    <mat-select [(ngModel)]="ubicacionSeleccionadaId" name="ubicacion_id">
+                        <mat-option *ngFor="let u of todasLasUbicaciones" [value]="u.id">{{ u.nombre_clinica }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-stroked-button color="primary" type="button" (click)="onAsignarUbicacion()">Asignar</button>
+            </div>
+            <div style="margin-top: 1rem;">
+                <strong>Ubicaciones Asignadas:</strong>
+                <ul *ngIf="ubicacionesAsignadas.length > 0; else noAsignadasU">
+                    <li *ngFor="let u of ubicacionesAsignadas" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; font-size: 0.9em;">
+                        <span>{{ u.nombre_clinica }} ({{ u.ciudad }})</span>
+                        <button mat-icon-button color="warn" type="button" (click)="onQuitarUbicacion(u.id)"><mat-icon>delete_outline</mat-icon></button>
+                    </li>
+                </ul>
+                <ng-template #noAsignadasU><p style="font-style: italic; margin-top: 0.5rem; font-size: 0.9em;">Ninguna.</p></ng-template>
+            </div>
+
+            <hr style="margin: 1.5rem 0;">
+            <h4>Asignar Especialidad</h4>
+            <div style="display: flex; align-items: center; gap: 1rem;">
+                <mat-form-field appearance="outline" style="flex-grow: 1;">
+                    <mat-label>Selecciona una especialidad...</mat-label>
+                    <mat-select [(ngModel)]="especialidadSeleccionadaId" name="especialidad_id">
+                        <mat-option *ngFor="let e of todasLasEspecialidades" [value]="e.id">{{ e.nombre }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+                <button mat-stroked-button color="primary" type="button" (click)="onAsignarEspecialidad()">Asignar</button>
+            </div>
+
+            <div style="margin-top: 1rem;">
+                <strong>Especialidades Asignadas:</strong>
+                <ul *ngIf="especialidadesAsignadas.length > 0; else noAsignadasE">
+                    <li *ngFor="let e of especialidadesAsignadas" style="display: flex; justify-content: space-between; align-items: center; margin-top: 0.5rem; font-size: 0.9em;">
+                        <span>{{ e.nombre }}</span>
+                        <button mat-icon-button color="warn" type="button" (click)="onQuitarEspecialidad(e.id)"><mat-icon>delete_outline</mat-icon></button>
+                    </li>
+                </ul>
+                <ng-template #noAsignadasE><p style="font-style: italic; margin-top: 0.5rem; font-size: 0.9em;">Ninguna.</p></ng-template>
+            </div>
+            
+        </mat-card-content>
+        <mat-card-actions align="end" style="padding: 0 1rem 1rem 1rem;">
+            <button mat-button (click)="vetParaEditar = null">Cancelar</button>
+            <button mat-flat-button color="primary" (click)="actualizarVeterinario()">Guardar Cambios</button>
+        </mat-card-actions>
+        </mat-card>
+
+        <ul class="vet-list">
+        <li *ngFor="let vet of veterinarios" class="vet-list-item">
+            <div>
+            <h3>{{ vet.nombre_completo }}</h3>
+            <p>Cédula Profesional: {{ vet.cedula_profesional }}</p>
+            </div>
+            <div *ngIf="isAdmin" class="vet-list-actions">
+            <button mat-icon-button color="primary" (click)="seleccionarParaEditar(vet)">
+                <mat-icon>edit</mat-icon>
+            </button>
+            <button mat-icon-button color="warn" (click)="eliminarVeterinario(vet.id)">
+                <mat-icon>delete</mat-icon>
+            </button>
+            </div>
+        </li>
+        </ul>
+    </div>
+</div>

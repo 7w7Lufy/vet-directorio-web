@@ -1,0 +1,188 @@
+/* Contenedor principal de la página */
+.admin-panel-container {
+  padding: 2rem 4rem;
+  max-width: 1400px;
+  margin: auto;
+}
+
+/* --- Encabezado --- */
+.admin-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.admin-header h1 {
+  margin: 0;
+  font-size: 2rem;
+}
+
+.header-buttons {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* --- Contenedor para Agregar Veterinario --- */
+.add-vet-container {
+  background-color: #f5f5f5; /* Color gris claro de tu imagen */
+  border-radius: 16px;
+  margin-top: 2rem;
+}
+
+.add-vet-content {
+  display: flex;
+  flex-wrap: wrap; /* Para que sea responsivo en pantallas chicas */
+  gap: 2rem;
+  padding: 1rem 0;
+}
+
+/* Columna 1: Formulario */
+.vet-form-fields {
+  flex: 2; /* Ocupa 2/3 del espacio */
+  display: flex;
+  flex-direction: column;
+  min-width: 300px; /* Ancho mínimo */
+}
+
+.full-width-field {
+  width: 100%;
+}
+
+.agregar-button {
+  background-color: #333; /* Color oscuro del botón */
+  color: white;
+  align-self: flex-start; /* Se alinea a la izquierda */
+  padding: 0.5rem 1.5rem;
+  margin-top: 1rem;
+}
+
+/* Columna 2: Círculo de Foto */
+.vet-form-photo {
+  flex: 1; /* Ocupa 1/3 del espacio */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 200px;
+}
+
+.photo-circle {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background-color: #333; /* Color oscuro del círculo */
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  cursor: pointer;
+  position: relative; /* Para ocultar el input de archivo */
+  transition: background-color 0.2s;
+}
+
+.photo-circle:hover {
+  background-color: #555;
+}
+
+.photo-input-hidden {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+/* --- Listado Actual --- */
+.listado-container {
+  margin-top: 3rem;
+}
+
+.listado-container h2 {
+  font-size: 1.8rem;
+}
+
+.divider {
+  border: none;
+  border-top: 2px solid #333; /* Línea gruesa de tu imagen */
+  margin-bottom: 2rem;
+}
+
+.vet-list {
+  list-style: none;
+  padding: 0;
+}
+
+.vet-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 0;
+  border-bottom: 1px solid #eee;
+  gap: 1rem; /* Espacio entre info+foto y acciones */
+}
+
+.vet-list-item h3 {
+  margin: 0;
+  font-size: 1.3rem;
+}
+.vet-list-item p {
+  margin: 0;
+  color: #666;
+}
+
+.vet-list-actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.vet-info-and-photo {
+  display: flex;
+  align-items: center;
+  gap: 1.5rem; /* Espacio entre foto y datos */
+  flex-grow: 1; /* Ocupa el espacio disponible */
+}
+
+.vet-list-photo .photo-circle-small {
+  width: 60px; /* Tamaño más pequeño para la lista */
+  height: 60px;
+  border-radius: 50%;
+  background-color: #e0e0e0;
+  color: #757575;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden; /* Para que la imagen no se salga */
+  border: 1px solid #ccc;
+}
+
+.vet-list-photo .photo-circle-small:hover {
+  background-color: #bdbdbd;
+}
+
+.vet-list-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Asegura que la imagen cubra el círculo */
+}
+
+.vet-list-photo .photo-input-hidden {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.vet-data h3 {
+  margin: 0 0 0.2rem 0;
+  font-size: 1.2rem;
+}
+.vet-data p {
+  margin: 0;
+  font-size: 0.9em;
+  color: #666;
+}

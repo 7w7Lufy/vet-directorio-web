@@ -1,0 +1,30 @@
+<mat-toolbar class="custom-navbar">
+    
+    
+    
+    <a routerLink="/" class="navbar-logo">
+        <mat-icon>pets</mat-icon> <span>VetDirectorio</span>
+    </a> 
+    
+    <div class="navbar-links">
+        <a mat-button routerLink="/">Inicio</a>
+        <button mat-button (click)="openContactModal()">Contacto</button> </div>
+    
+    <div class="navbar-actions">
+        
+        <ng-container *ngIf="!authService.isLoggedIn()">
+        <a mat-icon-button routerLink="/login" aria-label="Iniciar Sesión">
+            <mat-icon>login</mat-icon> </a>
+        </ng-container>
+        
+        <ng-container *ngIf="authService.isLoggedIn()">
+        <a mat-button [routerLink]="esAdmin() ? '/admin' : '/perfil'">
+            <mat-icon>dashboard</mat-icon>
+            <span>{{ esAdmin() ? 'Panel' : 'Mi Perfil' }}</span>
+        </a>
+        <button mat-icon-button (click)="logout()" aria-label="Cerrar sesión">
+            <mat-icon>logout</mat-icon> </button>
+        </ng-container>
+        
+    </div>
+</mat-toolbar>

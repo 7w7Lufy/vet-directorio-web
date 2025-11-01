@@ -1,0 +1,63 @@
+<div class="page-container">
+    
+    <a mat-flat-button class="back-button" [routerLink]="['/admin']">
+        <mat-icon>arrow_back</mat-icon>
+        Volver a Inicio
+    </a>
+
+    <div class="title-bar">
+        <h1>Gestionar Especialidades</h1>
+    </div>
+
+    <mat-card class="form-card" *ngIf="isAdmin">
+        <mat-card-header>
+        <mat-card-title>Agregar nueva Especialidad</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        <form (ngSubmit)="agregarEspecialidad()" class="add-form">
+            <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Nombre de la Especialidad</mat-label>
+            <input matInput name="nombre_especialidad" [(ngModel)]="nuevaEspecialidad.nombre" required>
+            </mat-form-field>
+            <button mat-flat-button type="submit" class="add-button">Agregar Especialidad</button>
+        </form>
+        </mat-card-content>
+    </mat-card>
+
+    <mat-card class="form-card" *ngIf="especialidadParaEditar && isAdmin" style="background-color: #f0f0f0; margin-top: 1rem;">
+        <mat-card-header>
+        <mat-card-title>Editando: {{ especialidadParaEditar.nombre }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+        <form (ngSubmit)="actualizarEspecialidad()" class="add-form">
+            <mat-form-field appearance="outline" class="full-width-field">
+            <mat-label>Nuevo Nombre</mat-label>
+            <input matInput name="edit_nombre_especialidad" [(ngModel)]="especialidadParaEditar.nombre" required>
+            </mat-form-field>
+            <div class="edit-buttons">
+            <button mat-flat-button type="submit" class="edit-button-save">Guardar Cambios</button>
+            <button mat-button type="button" (click)="especialidadParaEditar = null">Cancelar</button>
+            </div>
+        </form>
+        </mat-card-content>
+    </mat-card>
+
+    <div class="list-container">
+        <h2>Especialidades registradas</h2>
+        
+        <ul class="spec-list">
+        <li *ngFor="let e of especialidades" class="spec-list-item">
+            <span class="spec-name">{{ e.nombre }}</span>
+            <div class="spec-actions" *ngIf="isAdmin">
+            <button mat-flat-button class="edit-button" (click)="seleccionarParaEditar(e)">Editar</button>
+            <button mat-flat-button class="delete-button" (click)="eliminarEspecialidad(e.id)">Eliminar</button>
+            </div>
+        </li>
+        </ul>
+        
+        <ng-template #noHayEspecialidades>
+        <p>No hay especialidades registradas.</p>
+        </ng-template>
+    </div>
+
+</div>

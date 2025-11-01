@@ -1,0 +1,178 @@
+.directorio-container {
+  max-width: 1200px;
+  margin: 2rem auto; /* Añade margen superior/inferior */
+  padding: 2rem;
+  background-color: #f4edd93a; /* Fondo blanco para el área de contenido */
+  border-radius: 15px; /* Opcional: bordes redondeados */
+  border-style:groove;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1); /* Opcional: sombra suave */
+}
+
+
+/* --- Encabezado y Filtros --- */
+.directorio-header {
+  background-color: transparent; /* Quita el fondo gris si lo tenía */
+  padding: 0 0 1.5rem 0; /* Ajusta padding */
+  border-radius: 0;
+  border-bottom: 3px solid #28852d; /* Línea divisoria */
+  margin-bottom: 2rem;
+}
+
+.filtros-container {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+}
+
+.filtros-container span {
+  font-size: 1.3em;
+  color: #000000; /* Puedes encontrar a nuestros Medicos Veterinarios por: */
+}
+
+.filtros-container mat-form-field {
+  width: 200px;
+}
+
+/* El titulo de la pagina */
+.titulo-container {
+  text-align: center;
+  margin-top: 1rem;
+}
+.titulo-container h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.titulo-container p {
+  font-size: 1.1rem;
+  color: #000000; /* El directorio mas completo de oaxaca */
+  margin: 0;
+}
+
+/* --- Spinner de Carga --- */
+.spinner-container {
+  display: flex;
+  justify-content: center;
+  padding: 4rem;
+}
+
+/* --- Tarjeta de Veterinario --- */
+.vet-card {
+  display: flex;
+  flex-direction: row; /* Horizontal */
+  gap: 1.5rem;
+  margin-top: 2rem;
+  padding: 1.5rem;
+  background-color:   #f4edd9bd;  /* tarjeta del veterinario */
+  border-radius: 16px;
+  flex-wrap: wrap; /* Para pantallas pequeñas */
+}
+
+/* Columna Izquierda (Foto) */
+.vet-card-left {
+  flex: 0 0 200px; /* Ancho fijo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.vet-foto-circulo {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  background-color: #333;
+  color: white;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.vet-card-left strong {
+  font-size: 1rem;
+  margin-top: 0.5rem;
+}
+.vet-card-left span {
+  font-size: 0.9rem;
+  color: #060606; /*Cedula profesional */
+}
+
+/* Columna Derecha (Info) */
+.vet-card-right {
+  flex: 1; /* Ocupa el resto del espacio */
+  display: flex;
+  flex-direction: column;
+}
+
+.vet-card-right h2 {
+  font-size: 1.8rem;
+  font-weight: bold;
+  margin-top: 0;
+  margin-bottom: 1rem;
+}
+
+.vet-info-row {
+  display: flex;
+  gap: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+.vet-info-block {
+  flex: 1;
+}
+
+.vet-info-block strong,
+.vet-info-servicios strong,
+.vet-info-clinica strong {
+  font-size: 1rem;
+  margin-bottom: 0.5rem;
+  display: block;
+}
+
+.vet-info-block ul {
+  padding-left: 1.5rem;
+  margin: 0.5rem 0 0 0;
+}
+
+.vet-info-servicios {
+  margin-top: 1rem;
+}
+.vet-info-servicios strong {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.vet-info-servicios p {
+  margin: 0.5rem 0 0 0;
+  color: #000000;  /* descripcion */
+}
+
+.vet-info-clinica {
+  margin-top: 1rem;
+}
+
+/* especialidades */
+.vet-card-right mat-chip-listbox mat-chip {
+    background-color: #4178a0; /* Un color suave relacionado con el primario */
+}
+
+.mas-info-button {
+  background-color: #de3434;
+  color: rgb(0, 0, 0);
+  margin-top: 1rem;
+}
+
+
+/* Media Query para pantallas pequeñas (ej. menos de 768px) */
+@media (max-width: 767px) {
+  .directorio-container {
+    max-width: 100%; /* Ocupa todo el ancho */
+    padding: 1rem;    /* Reduce el padding lateral */
+    margin: 1rem 0;   /* Ajusta margen superior/inferior */
+    border-radius: 0; /* Quita bordes redondeados si los tenía */
+    box-shadow: none; /* Quita sombra si la tenía */
+  }
+}

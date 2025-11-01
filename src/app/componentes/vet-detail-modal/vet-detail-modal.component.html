@@ -1,0 +1,131 @@
+<br>    
+<h2 mat-dialog-title class="modal-title">
+    Información completa sobre MVZ. {{ veterinario?.nombre_completo || '...' }}
+    </h2>
+
+    <mat-dialog-content class="modal-content">
+    <div *ngIf="isLoading" class="spinner-container">
+        <mat-spinner diameter="50"></mat-spinner>
+    </div>
+
+    <div *ngIf="!isLoading && veterinario" class="vet-details-grid">
+
+        <div class="vet-col vet-col-left">
+        <div class="vet-foto-circulo-modal">
+            <img *ngIf="veterinario.foto_perfil_url" [src]="veterinario.foto_perfil_url" alt="Foto de {{veterinario.nombre_completo}}">
+            <mat-icon *ngIf="!veterinario.foto_perfil_url" style="font-size: 80px; width: 80px; height: 80px;">person</mat-icon>
+        </div>
+        <div class="cedula-info">
+            <strong>Cédula Profesional</strong>
+            <span>{{ veterinario.cedula_profesional }}</span>
+        </div>
+        <hr>
+        <div class="additional-info">
+            <strong>Costo de la consulta:</strong>
+            <span *ngIf="veterinario.costo_consulta !== null">
+            {{ veterinario.costo_consulta | currency:'MXN':'symbol':'1.2-2' }}
+            </span>
+            <span *ngIf="veterinario.costo_consulta === null">
+            No especificado
+            </span>
+            <strong>Urgencias:</strong>
+            <span>{{ veterinario.acepta_urgencias ? 'Sí' : 'No' }}</span>
+            <strong>Estudios:</strong>
+            <ul>
+            <li *ngFor="let s of veterinario.estudios">{{ s.nivel_estudio }} - {{ s.titulo_obtenido }} ({{ s.institucion }})</li>
+            <li *ngIf="veterinario.estudios?.length === 0">No especificados</li>
+            </ul>
+        </div>
+        </div>
+
+        <div class="vet-col vet-col-center">
+        <h3>Clínica: {{ veterinario.ubicaciones[0].nombre_clinica || 'N/A' }}</h3>
+
+        <div class="section-block">
+            <strong>Especialidades:</strong>
+            <mat-chip-listbox *ngIf="veterinario.especialidades.length > 0">
+            <mat-chip *ngFor="let e of veterinario.especialidades">{{ e.nombre }}</mat-chip>
+            </mat-chip-listbox>
+            <span *ngIf="veterinario.especialidades?.length === 0" class="no-data">No especificadas</span>
+        </div>
+
+        <div class="servicios-grid">
+            <div class="section-block">
+            <strong><mat-icon>medical_services</mat-icon> Servicios disponibles</strong>
+            <ul *ngIf="veterinario.ubicaciones?.[0]?.servicios_texto; else noServicios">
+                <li *ngFor="let item of veterinario.ubicaciones[0]?.servicios_texto?.split('\n')">{{ item }}</li>
+            </ul>
+            <ng-template #noServicios><span class="no-data">No especificados</span></ng-template>
+            </div>
+            <div class="section-block">
+            <strong><mat-icon>science</mat-icon> Capacidades/Otros</strong>
+            <ul *ngIf="veterinario.ubicaciones?.[0]?.capacidades_texto; else noCapacidades">
+                <li *ngFor="let item of veterinario.ubicaciones[0]?.capacidades_texto?.split('\n')">{{ item }}</li>
+            </ul>
+            <ng-template #noCapacidades><span class="no-data">No especificadas</span></ng-template>
+            </div>
+        </div>
+            <strong><mat-icon>info</mat-icon> Más sobre nosotros</strong>
+            <p>{{ veterinario.descripcion || 'No hay descripción disponible.' }}</p>
+        <div class="section-block sobre-nosotros">          
+            <div *ngIf="imagenes?.length === 0" class="sobre-nosotros-img">
+                <mat-icon>image</mat-icon> </div>
+            <div class="sobre-nosotros-text">
+            <hr style="margin: 2rem 0;">
+            <div class="section-block">
+            <strong><mat-icon>photo_library</mat-icon> Galería de Fotos</strong>
+            <div *ngIf="canManagePhotos" style="margin-bottom: 1rem;">
+                <input type="file" #fileInput hidden (change)="onFileSelected($event)" accept="image/*">
+                <button mat-stroked-button color="primary" (click)="fileInput.click()">
+                <mat-icon>add_a_photo</mat-icon> Añadir Foto
+                </button>
+            </div>
+            
+            <div *ngIf="imagenes.length > 0; else noImagenes" class="image-gallery-thumbnails"> 
+                <div *ngFor="let img of imagenes; let i = index" class="thumbnail-item" (click)="openLightbox(i)">
+                
+                    <img [src]="img.imagen_url" [alt]="img.descripcion || 'Imagen de galería'">
+                
+                <button *ngIf="canManagePhotos" mat-icon-button color="warn" class="delete-img-button" 
+                    (click)="$event.stopPropagation(); onDeleteImage(img.id)">
+                    <mat-icon>delete</mat-icon>
+                </button>
+                </div>
+            </div>
+            <ng-template #noImagenes>
+                <p class="no-data">No hay imágenes en la galería.</p>
+            </ng-template>
+            </div>
+            </div>
+        </div>
+        </div>
+
+        <div class="vet-col vet-col-right">
+        <div class="section-block">
+            <strong><mat-icon>schedule</mat-icon> Horarios</strong>
+            <ul *ngIf="veterinario.ubicaciones?.[0]?.horarios_texto; else noHorarios">
+            <li *ngFor="let item of veterinario.ubicaciones[0]?.horarios_texto?.split('\n')">{{ item }}</li>
+            </ul>
+            <ng-template #noHorarios><span class="no-data">No especificados</span></ng-template>
+        </div>
+        <hr>
+        <div class="section-block">
+            <strong><mat-icon>location_on</mat-icon> Ubicación</strong>
+            <p>{{ veterinario.ubicaciones[0].calle_numero || 'No especificada' }}, {{ veterinario.ubicaciones[0].colonia }}</p>
+            <p>{{ veterinario.ubicaciones[0].ciudad }}, {{ veterinario.ubicaciones[0].estado }}</p>
+            <p *ngIf="veterinario.ubicaciones[0]?.telefono_contacto">
+                <strong>Teléfono:</strong> {{ veterinario.ubicaciones[0].telefono_contacto }}
+            </p>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="!isLoading && !veterinario" class="error-message">
+        <p>No se pudo cargar la información del veterinario.</p>
+    </div>
+
+    </mat-dialog-content>
+
+    <mat-dialog-actions align="end">
+    <button mat-flat-button class="close-button" (click)="closeDialog()">Cerrar</button>
+    </mat-dialog-actions>

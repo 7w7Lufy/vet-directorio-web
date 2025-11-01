@@ -1,1 +1,45 @@
-/* You can add global styles to this file, and also import other style files */
+/* src/styles.css */
+@import '@angular/material/prebuilt-themes/indigo-pink.css'; /* O el tema que elegiste */
+
+html, body { 
+  height: 100%; 
+  margin: 0; 
+  font-family: Roboto, "Helvetica Neue", sans-serif; 
+}
+/*
+body {
+  background-color: #799cbf;
+} */
+
+body {
+  /* Ruta RELATIVA desde styles.css hasta tu imagen */
+  background-image: url('./app/Assets/Images/vet-background.png'); 
+  /* Ajusta cómo se muestra la imagen */
+  background-size: cover;          /* Cubre todo el espacio */
+  background-repeat: no-repeat;     /* No repetir la imagen */
+  background-position: center center; /* Centrar la imagen */
+  background-attachment: fixed;     /* Fija el fondo al hacer scroll */
+  /* Color de respaldo por si la imagen no carga */
+  background-color: #f0f0f0; 
+  /* Asegura que el body tenga altura mínima */
+  min-height: 100vh;
+  /* Asegúrate de que no haya márgenes por defecto */
+  margin: 0; 
+  padding: 0;
+}
+
+.directorio-container {
+  background-color: rgba(255, 255, 255, 0.9); /* Blanco con 90% de opacidad */
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+}
+
+
+/* (Puedes mantener los estilos de .error-snackbar si los quieres) */
+.error-snackbar {
+  background-color: #f44336; /* Rojo */
+  color: white;
+}
+.error-snackbar .mat-mdc-button-base {
+   color: white !important;
+}

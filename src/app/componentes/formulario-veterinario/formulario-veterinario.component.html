@@ -1,0 +1,23 @@
+<mat-card>
+  <mat-card-header>
+    <mat-card-title>Agregar Nuevo Veterinario</mat-card-title>
+  </mat-card-header>
+  <mat-card-content>
+    <form (ngSubmit)="agregarVeterinario()">
+      <mat-form-field appearance="fill" style="width: 100%;">
+        <mat-label>Nombre Completo</mat-label>
+        <input matInput type="text" name="nombre" [(ngModel)]="nuevoVeterinario.nombre_completo" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="fill" style="width: 100%; margin-top: 1rem;">
+        <mat-label>Cédula Profesional</mat-label>
+        <input matInput type="text" name="cedula" [(ngModel)]="nuevoVeterinario.cedula_profesional">
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" type="submit" style="margin-top: 1rem;">Agregar</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+<br>
+<br>
+<br>

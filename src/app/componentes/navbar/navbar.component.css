@@ -1,0 +1,81 @@
+
+.custom-navbar {
+background-color: #f4edd9;                 /* beige base */
+  background-image: url('../../Assets/Images/navbar_pattern_transparent_1600x75.png');
+  background-repeat: repeat-x;
+  background-position: center center;
+  background-size: auto 75px;                /* ajusta a tu alto real */
+  height: 75px;
+  color: #000;
+  padding: 0 1rem;
+  display: flex; justify-content: space-between; align-items: center;
+  border-bottom: 4px solid #4c814c; /* Ajusta el grosor y el color como quieras */
+}
+.navbar-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: inherit; /* Hereda color blanco */
+}
+
+.navbar-logo-img {
+  height: 45px; /* Altura del logo (ajusta si es necesario) */
+  width: auto;  /* Mantiene proporción */
+  /* Opcional: añade margen si dejas texto al lado */
+  /* margin-right: 0.5rem; */
+}
+
+/* --- Centro: Links --- */
+.navbar-links {
+  /* Centrado absoluto */
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  gap: 0.5rem; /* Espacio entre links */
+}
+
+.navbar-links a,
+.navbar-links button { /* Aplica a botones también */
+  font-size: 1rem;
+  font-weight: 500;
+  color: inherit; /* Hereda color blanco */
+}
+.navbar-links a:hover,
+.navbar-links button:hover {
+  background-color: rgba(177, 177, 177, 0.548); /* Resaltado sutil */
+  border-radius: 4px;
+}
+
+
+/* --- Derecha: Acciones --- */
+.navbar-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.navbar-actions a,
+.navbar-actions button {
+  color: inherit; /* Hereda color blanco */
+}
+
+.navbar-actions mat-icon {
+  font-size: 1.8rem;
+  width: 1.8rem;
+  height: 1.8rem;
+}
+
+
+/* Media Query para pantallas pequeñas */
+@media (max-width: 767px) {
+  .custom-navbar {
+    padding: 0 0.5rem; /* Reduce padding lateral */
+  }
+
+  .navbar-links {
+    display: none; /* Oculta los links "Inicio" y "Contacto" */
+  }
+
+
+}

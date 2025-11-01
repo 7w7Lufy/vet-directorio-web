@@ -1,0 +1,170 @@
+<div class="page-container">
+
+  <a mat-flat-button class="back-button" [routerLink]="['/admin']">
+    <mat-icon>arrow_back</mat-icon>
+    Volver a Inicio
+  </a>
+
+  <div class="title-bar">
+    <h1>Gestionar Ubicaciones (Clinicas)</h1>
+  </div>
+
+  <mat-card class="form-card" *ngIf="isAdmin">
+    <mat-card-header>
+      <mat-card-title>Agregar nueva ubicacion</mat-card-title>
+    </mat-card-header>
+    <br>
+    <mat-card-content>
+      <form (ngSubmit)="agregarUbicacion()" class="location-form">
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Nombre de la clinica</mat-label>
+          <input matInput name="nombre_clinica" [(ngModel)]="nuevaUbicacion.nombre_clinica" required>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>No. Calle</mat-label>
+          <input matInput name="calle_numero" [(ngModel)]="nuevaUbicacion.calle_numero" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Colonia</mat-label>
+          <input matInput name="colonia" [(ngModel)]="nuevaUbicacion.colonia">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Latitud</mat-label>
+          <input matInput name="latitud" [(ngModel)]="nuevaUbicacion.latitud" placeholder="Ej: 17.104629">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Codigo Postal</mat-label>
+          <input matInput name="codigo_postal" [(ngModel)]="nuevaUbicacion.codigo_postal">
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Ciudad</mat-label>
+          <input matInput name="ciudad" [(ngModel)]="nuevaUbicacion.ciudad" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Longitud</mat-label>
+          <input matInput name="longitud" [(ngModel)]="nuevaUbicacion.longitud" placeholder="Ej: -96.712585">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Estado</mat-label>
+          <input matInput name="estado" [(ngModel)]="nuevaUbicacion.estado" required>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field">
+          <mat-label>Telefono celular</mat-label>
+          <input matInput name="telefono" [(ngModel)]="nuevaUbicacion.telefono_contacto" type="tel">
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Servicios Ofrecidos (uno por línea)</mat-label>
+          <textarea matInput rows="4" name="servicios_texto" [(ngModel)]="nuevaUbicacion.servicios_texto"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Capacidades/Otros (uno por línea)</mat-label>
+          <textarea matInput rows="4" name="capacidades_texto" [(ngModel)]="nuevaUbicacion.capacidades_texto"></textarea>
+        </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>Horarios (uno por línea)</mat-label>
+          <textarea matInput rows="4" name="horarios_texto" [(ngModel)]="nuevaUbicacion.horarios_texto"></textarea>
+        </mat-form-field>
+
+      </form>
+    </mat-card-content>
+    <mat-card-actions>
+      <button mat-flat-button class="add-button" (click)="agregarUbicacion()">Agregar</button>
+    </mat-card-actions>
+  </mat-card>
+
+<br>
+<br>
+<mat-card class="form-card edit-form" *ngIf="ubicacionParaEditar && isAdmin">
+  <mat-card-header>
+    <mat-card-title>Editando: {{ ubicacionParaEditar.nombre_clinica }}</mat-card-title>
+  </mat-card-header>
+  <br>
+  <mat-card-content>
+    <form *ngIf="ubicacionParaEditar" (ngSubmit)="actualizarUbicacion()" class="location-form">
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Nombre de la clinica</mat-label>
+        <input matInput name="edit_nombre_clinica" [(ngModel)]="ubicacionParaEditar.nombre_clinica" required>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>No. Calle</mat-label>
+        <input matInput name="edit_calle_numero" [(ngModel)]="ubicacionParaEditar.calle_numero" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Colonia</mat-label>
+        <input matInput name="edit_colonia" [(ngModel)]="ubicacionParaEditar.colonia">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Latitud</mat-label>
+        <input matInput name="edit_latitud" [(ngModel)]="ubicacionParaEditar.latitud" placeholder="Ej: 17.104629">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Codigo Postal</mat-label>
+        <input matInput name="edit_codigo_postal" [(ngModel)]="ubicacionParaEditar.codigo_postal">
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Ciudad</mat-label>
+        <input matInput name="edit_ciudad" [(ngModel)]="ubicacionParaEditar.ciudad" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Longitud</mat-label>
+        <input matInput name="edit_longitud" [(ngModel)]="ubicacionParaEditar.longitud" placeholder="Ej: -96.712585">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Estado</mat-label>
+        <input matInput name="edit_estado" [(ngModel)]="ubicacionParaEditar.estado" required>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field">
+        <mat-label>Telefono celular</mat-label>
+        <input matInput name="edit_telefono" [(ngModel)]="ubicacionParaEditar.telefono_contacto" type="tel">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Servicios Ofrecidos (uno por línea)</mat-label>
+        <textarea matInput rows="4" name="edit_servicios_texto" [(ngModel)]="ubicacionParaEditar.servicios_texto"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Capacidades/Otros (uno por línea)</mat-label>
+        <textarea matInput rows="4" name="edit_capacidades_texto" [(ngModel)]="ubicacionParaEditar.capacidades_texto"></textarea>
+      </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>Horarios (uno por línea)</mat-label>
+        <textarea matInput rows="4" name="edit_horarios_texto" [(ngModel)]="ubicacionParaEditar.horarios_texto"></textarea>
+      </mat-form-field>
+    </form>
+  </mat-card-content>
+  <mat-card-actions align="end">
+    <button mat-button (click)="ubicacionParaEditar = null">Cancelar</button>
+    <button mat-flat-button color="primary" (click)="actualizarUbicacion()">Guardar Cambios</button>
+  </mat-card-actions>
+</mat-card>
+
+
+<div class="list-container">
+    <h2>Clinicas registradas</h2>
+
+    <ul class="clinic-list">
+      <li *ngFor="let u of ubicaciones" class="clinic-list-item">
+        <div class="clinic-details">
+          <h3>{{ u.nombre_clinica }}</h3>
+          <p>{{ u.calle_numero }}, {{ u.colonia }}, {{ u.codigo_postal }}, {{ u.ciudad }}, {{ u.estado }}</p>
+          </div>
+        <div class="clinic-actions" *ngIf="isAdmin">
+          <button mat-flat-button class="edit-button" (click)="seleccionarParaEditar(u)">Editar</button>
+          <button mat-flat-button class="delete-button" (click)="eliminarUbicacion(u.id)">Eliminar</button>
+        </div>
+      </li>
+    </ul>
+
+    <ng-template #noHayUbicaciones>
+      <p>No hay ubicaciones registradas.</p>
+    </ng-template>
+  </div>
+
+</div>
