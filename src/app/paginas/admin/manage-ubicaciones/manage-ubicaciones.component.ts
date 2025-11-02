@@ -32,7 +32,8 @@ export class ManageUbicacionesComponent implements OnInit {
     longitud: null as number | string | null,   // <-- AÑADIDO
     servicios_texto: '',
     capacidades_texto: '',
-    horarios_texto: ''
+    horarios_texto: '',
+    map_url: null as string | null
   };
 
   constructor(

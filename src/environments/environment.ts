@@ -1,5 +1,6 @@
 // src/environments/environment.ts
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost:3000/api' // Para desarrollo local
+  // Cambia esto para apuntar a tu API en la nube:
+  apiUrl: 'https://vet-directorio-api.onrender.com/api' 
 };

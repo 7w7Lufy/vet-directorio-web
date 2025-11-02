@@ -68,6 +68,10 @@
           <mat-label>Horarios (uno por línea)</mat-label>
           <textarea matInput rows="4" name="horarios_texto" [(ngModel)]="nuevaUbicacion.horarios_texto"></textarea>
         </mat-form-field>
+        <mat-form-field appearance="outline" class="form-field full-width">
+          <mat-label>URL de Google Maps</mat-label>
+          <input matInput name="map_url" [(ngModel)]="nuevaUbicacion.map_url" placeholder="Pega el enlace de 'Compartir' de Google Maps">
+        </mat-form-field>
 
       </form>
     </mat-card-content>
@@ -137,6 +141,11 @@
         <mat-label>Horarios (uno por línea)</mat-label>
         <textarea matInput rows="4" name="edit_horarios_texto" [(ngModel)]="ubicacionParaEditar.horarios_texto"></textarea>
       </mat-form-field>
+      <mat-form-field appearance="outline" class="form-field full-width">
+        <mat-label>URL de Google Maps</mat-label>
+        <input matInput name="edit_map_url" [(ngModel)]="ubicacionParaEditar.map_url" placeholder="Pega el enlace de 'Compartir' de Google Maps">
+      </mat-form-field>
+
     </form>
   </mat-card-content>
   <mat-card-actions align="end">

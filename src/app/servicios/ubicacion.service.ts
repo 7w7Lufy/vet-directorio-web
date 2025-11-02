@@ -17,6 +17,7 @@ export interface Ubicacion {
   servicios_texto?: string | null;   // Texto de servicios (opcional)
   capacidades_texto?: string | null; // Texto de capacidades (opcional)
   horarios_texto?: string | null;    // Texto de horarios (opcional)
+  map_url?: string | null;
 }
 
 @Injectable({

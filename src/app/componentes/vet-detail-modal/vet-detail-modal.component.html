@@ -116,6 +116,15 @@
             <p *ngIf="veterinario.ubicaciones[0]?.telefono_contacto">
                 <strong>Teléfono:</strong> {{ veterinario.ubicaciones[0].telefono_contacto }}
             </p>
+            <a *ngIf="veterinario.ubicaciones[0]?.map_url" 
+                [href]="veterinario.ubicaciones[0].map_url" 
+                target="_blank" 
+                mat-stroked-button 
+                color="primary" 
+                style="margin-top: 1rem;">
+                <mat-icon>map</mat-icon>
+                Ver en Google Maps
+            </a>
             </div>
         </div>
     </div>
