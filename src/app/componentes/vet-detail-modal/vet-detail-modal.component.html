@@ -51,14 +51,14 @@
 
         <div class="servicios-grid">
             <div class="section-block">
-            <strong><mat-icon>medical_services</mat-icon> Servicios disponibles</strong>
+            <strong><mat-icon>medical_services</mat-icon> Servicios medicos</strong>
             <ul *ngIf="veterinario.ubicaciones?.[0]?.servicios_texto; else noServicios">
                 <li *ngFor="let item of veterinario.ubicaciones[0]?.servicios_texto?.split('\n')">{{ item }}</li>
             </ul>
             <ng-template #noServicios><span class="no-data">No especificados</span></ng-template>
             </div>
             <div class="section-block">
-            <strong><mat-icon>science</mat-icon> Capacidades/Otros</strong>
+            <strong><mat-icon>science</mat-icon> Otros servicios </strong>
             <ul *ngIf="veterinario.ubicaciones?.[0]?.capacidades_texto; else noCapacidades">
                 <li *ngFor="let item of veterinario.ubicaciones[0]?.capacidades_texto?.split('\n')">{{ item }}</li>
             </ul>
