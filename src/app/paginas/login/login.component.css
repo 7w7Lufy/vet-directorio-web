@@ -39,3 +39,13 @@ mat-card-header {
 mat-card-actions {
   margin-top: 1rem;
 }
+
+:host {
+  background-image: url('/directorio-web/src/app/Assets/Images/vet-background.png'); 
+  background-size: cover; 
+  background-repeat: no-repeat; 
+  background-position: center center; 
+  display: block; 
+  /* Altura completa menos los 64px del navbar */
+  min-height: calc(100vh - 64px); 
+}

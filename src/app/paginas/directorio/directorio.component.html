@@ -1,91 +1,83 @@
+<!-- La pagina principal del sitio, filtros y texto principal -->
+
 <div class="directorio-container">
-    
+
     <header class="directorio-header">
         <div class="filtros-container">
-        <span>Puedes encontrar a nuestros Medicos Veterinarios por:</span>
-        <mat-form-field appearance="outline">
-            <mat-label>Especialidades</mat-label>
-        <mat-select [(ngModel)]="selectedEspecialidadId" (selectionChange)="onFilterChange()">
-            <mat-option [value]="null">Todas</mat-option> <mat-option *ngFor="let esp of especialidades" [value]="esp.id">{{ esp.nombre }}</mat-option>
-        </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Colonia</mat-label>
-            <mat-select [(ngModel)]="selectedColonia" (selectionChange)="onFilterChange()">
-            <mat-option [value]="null">Todas</mat-option> <mat-option *ngFor="let col of colonias" [value]="col">{{ col }}</mat-option>
-            </mat-select>
-        </mat-form-field>
-
-        <mat-form-field appearance="outline">
-            <mat-label>Urgencias</mat-label>
-            <mat-select [(ngModel)]="filtroUrgencias" (selectionChange)="onFilterChange()">
-            <mat-option [value]="null">Todos</mat-option> <mat-option [value]="true">Sí Acepta</mat-option>
-            <mat-option [value]="false">No Acepta</mat-option>
-            </mat-select>
-        </mat-form-field>
-
+            <span> Encuentra con mayor facilidad a tu medico ideal por:</span>
+            <mat-form-field appearance="outline">
+                <mat-label>Especialidades</mat-label>
+                <mat-select [(ngModel)]="selectedEspecialidadId" (selectionChange)="onFilterChange()">
+                <mat-option [value]="null">Todas</mat-option> <mat-option *ngFor="let esp of especialidades" [value]="esp.id">{{ esp.nombre }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Zona</mat-label>
+                <mat-select [(ngModel)]="selectedColonia" (selectionChange)="onFilterChange()">
+                <mat-option [value]="null">Todas</mat-option> <mat-option *ngFor="let col of colonias" [value]="col">{{ col }}</mat-option>
+                </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Urgencias</mat-label>
+                <mat-select [(ngModel)]="filtroUrgencias" (selectionChange)="onFilterChange()">
+                <mat-option [value]="null">Todos</mat-option> <mat-option [value]="true">Sí Acepta</mat-option>
+                <mat-option [value]="false">No Acepta</mat-option>
+                </mat-select>
+            </mat-form-field>
         </div>
-        
         <div class="titulo-container">
-        <h1>Encuentra al veterinario ideal para tu mascota</h1>
-        <p>El directorio mas completo de Oaxaca</p>
-        <br>
+            <h1>Encuentra al veterinario ideal para ti y tu mascota</h1>
+            <p>El directorio ideal para encontrar medicos y sus clinicas</p>
+            <br>
+            <p> Encontraras información sobre las especialidades que poseen, ubicacion (horarios y enlace) 
+            <br> estudios, servicios medicos y otros servicios que brinda la clinica, dale un vistazo a nuestros perfiles</p>
         </div>
     </header>
-
     <div *ngIf="isLoading" class="spinner-container">
         <mat-spinner></mat-spinner>
     </div>
-
     <main *ngIf="!isLoading">
         <div *ngIf="veterinarios.length > 0; else noResultados">
-        
         <mat-card *ngFor="let vet of veterinarios" class="vet-card">
-            
             <div class="vet-card-left">
-            <div class="vet-foto-circulo">
-                <img *ngIf="vet.foto_perfil_url" [src]="vet.foto_perfil_url" alt="Foto de {{vet.nombre_completo}}">
-                <mat-icon *ngIf="!vet.foto_perfil_url">person</mat-icon>
+                <div class="vet-foto-circulo">
+                    <img *ngIf="vet.foto_perfil_url" [src]="vet.foto_perfil_url" alt="Foto de {{vet.nombre_completo}}">
+                    <mat-icon *ngIf="!vet.foto_perfil_url">person</mat-icon>
+                </div>
+                <strong>Cédula Profesional</strong>
+                <span>{{ vet.cedula_profesional }}</span>
             </div>
-            <strong>Cédula Profesional</strong>
-            <span>{{ vet.cedula_profesional }}</span>
-            </div>
-
-        <div class="vet-card-right">
-            <h2>MVZ. {{ vet.nombre_completo }}</h2>
-            <div class="vet-info-row">
+            <div class="vet-card-right">
+                <h2>MVZ. {{ vet.nombre_completo }}</h2>
+                <div class="vet-info-row">
                     <div class="vet-info-block">
-                    <strong>Especialidades:</strong>
-                    <mat-chip-listbox *ngIf="vet.especialidades.length > 0">
-                        <mat-chip *ngFor="let e of vet.especialidades">{{ e.nombre }}</mat-chip>
-                    </mat-chip-listbox>
-                    <span *ngIf="vet.especialidades.length === 0">N/A</span>
+                        <strong>Especialidades:</strong>
+                        <mat-chip-listbox *ngIf="vet.especialidades.length > 0">
+                            <mat-chip *ngFor="let e of vet.especialidades">{{ e.nombre }}</mat-chip>
+                        </mat-chip-listbox>
+                        <span *ngIf="vet.especialidades.length === 0">N/A</span>
+                    </div>
+                    <div class="vet-info-block">
+                        <strong>Estudios:</strong>
+                        <ul *ngIf="vet.estudios.length > 0">
+                            <li *ngFor="let s of vet.estudios">{{ s.nivel_estudio }} - {{ s.titulo_obtenido }} ({{ s.institucion }})</li>
+                        </ul>
+                        <span *ngIf="vet.estudios.length === 0">N/A</span>
+                    </div>
                 </div>
-                
-                <div class="vet-info-block">
-                    <strong>Estudios:</strong>
-                    <ul *ngIf="vet.estudios.length > 0">
-                        <li *ngFor="let s of vet.estudios">{{ s.nivel_estudio }} - {{ s.titulo_obtenido }} ({{ s.institucion }})</li>
-                    </ul>
-                    <span *ngIf="vet.estudios.length === 0">N/A</span>
+                <div class="vet-info-servicios">
+                    <strong><mat-icon>home</mat-icon> Conoce un poco sobre nosotros </strong>
+                    <p>{{ vet.descripcion || 'No hay descripción disponible.' }}</p>
                 </div>
-            </div>
-            
-            <div class="vet-info-servicios">
-                <strong><mat-icon>home</mat-icon> Conoce un poco sobre nosotros </strong>
-                <p>{{ vet.descripcion || 'No hay descripción disponible.' }}</p>
-            </div>
-            
-            <div class="vet-info-clinica">
-                <strong>Clínica:</strong>
-                <span *ngIf="vet.ubicaciones.length > 0">{{ vet.ubicaciones[0].nombre_clinica }}</span>
-                <span *ngIf="vet.ubicaciones.length === 0">Sin clínica asignada</span>
-            </div>
-            <div class="vet-info-urgencias" style="margin-top: 1rem;">
-                <strong><mat-icon style="font-size: 1.1em; vertical-align: middle;">emergency</mat-icon> Urgencias:</strong>
-                <span *ngIf="vet.acepta_urgencias" style="color: #28a745; font-weight: bold;"> Sí Acepta</span>
-                <span *ngIf="!vet.acepta_urgencias" style="color: #dc3545;"> No Acepta</span>
+                <div class="vet-info-clinica">
+                    <strong>Clínica:</strong>
+                    <span *ngIf="vet.ubicaciones.length > 0">{{ vet.ubicaciones[0].nombre_clinica }}</span>
+                    <span *ngIf="vet.ubicaciones.length === 0">Sin clínica asignada</span>
+                </div>
+                <div class="vet-info-urgencias" style="margin-top: 1rem;">
+                    <strong><mat-icon style="font-size: 1.1em; vertical-align: middle;">emergency</mat-icon> Urgencias:</strong>
+                    <span *ngIf="vet.acepta_urgencias" style="color: #28a745; font-weight: bold;"> Sí Acepta</span>
+                    <span *ngIf="!vet.acepta_urgencias" style="color: #dc3545;"> No Acepta</span>
                 </div>
                 <mat-card-actions align="end">
                 <button mat-flat-button class="mas-info-button" (click)="openVetDetailModal(vet.id)">Mostrar mas...</button>
@@ -93,7 +85,6 @@
             </div>
         </mat-card>
         </div>
-
         <ng-template #noResultados>
         <p style="text-align: center; padding: 2rem;">No se encontraron veterinarios.</p>
         </ng-template>
