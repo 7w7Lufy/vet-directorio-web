@@ -9,7 +9,8 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   selector: 'app-perfil-vet',
   standalone: true,
   imports: [CommonModule, FormsModule, MaterialModule],
-  templateUrl: './perfil-vet.component.html'
+  templateUrl: './perfil-vet.component.html',
+  styleUrl: './perfil-vet.component.css'
 })
 export class PerfilVetComponent implements OnInit {
   perfil: any = null;
@@ -26,8 +27,15 @@ export class PerfilVetComponent implements OnInit {
   }
 
   guardarCambios() {
-    this.vetService.updateMiPerfil(this.perfil).subscribe(() => {
-      this.snackBar.open('Perfil guardado con éxito', 'Cerrar', { duration: 3000 });
+this.vetService.updateMiPerfil(this.perfil).subscribe({
+      next: () => {
+        // Usa MatSnackBar en lugar de alert
+        this.snackBar.open('Perfil guardado con éxito', 'Cerrar', { duration: 3000 });
+      },
+      error: (err) => {
+        console.error(err);
+        this.snackBar.open('Error al guardar el perfil', 'Cerrar', { duration: 5000, panelClass: ['error-snackbar'] });
+      }
     });
   }
 }

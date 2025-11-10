@@ -1,17 +1,37 @@
-<div style="padding: 2rem; max-width: 900px; margin: auto;">
-    <mat-card *ngIf="perfil">
-        <mat-card-header>
-        <mat-card-title>Mi Perfil Profesional</mat-card-title>
-        <mat-card-subtitle>{{ perfil.nombre_completo }}</mat-card-subtitle>
+    <div class="perfil-wrapper">
+    <mat-card *ngIf="perfil" class="perfil-card">
+        <mat-card-header class="perfil-header">
+        <mat-card-title class="perfil-title">
+            Mi Perfil Profesional
+        </mat-card-title>
+        <mat-card-subtitle class="perfil-subtitle">
+            {{ perfil.nombre_completo }}
+        </mat-card-subtitle>
         </mat-card-header>
-        <mat-card-content>
+
+        <mat-card-content class="perfil-content">
         <form (ngSubmit)="guardarCambios()">
-            <mat-form-field appearance="fill" style="width: 100%;">
+            <mat-form-field
+            appearance="fill"
+            class="full-width perfil-field">
             <mat-label>Descripción Profesional</mat-label>
-            <textarea matInput rows="5" name="descripcion" [(ngModel)]="perfil.descripcion"></textarea>
+            <textarea
+                matInput
+                rows="5"
+                name="descripcion"
+                class="perfil-textarea"
+                [(ngModel)]="perfil.descripcion">
+            </textarea>
             </mat-form-field>
-            <button mat-raised-button color="primary" type="submit">Guardar Cambios</button>
+
+            <button
+            mat-raised-button
+            color="primary"
+            type="submit"
+            class="perfil-button">
+            Guardar Cambios
+            </button>
         </form>
         </mat-card-content>
     </mat-card>
-</div>
+    </div>

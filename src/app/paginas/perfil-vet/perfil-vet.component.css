@@ -1,0 +1,113 @@
+    /* ===== CONTENEDOR GENERAL ===== */
+    /* Equivale a: padding: 2rem; max-width: 900px; margin: auto; */
+    .perfil-wrapper {
+    padding: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
+    }
+
+    /* ===== TARJETA ===== */
+    .perfil-card {
+    /* Color de fondo de la tarjeta */
+    background-color: #f4edd9bd;
+    /* Borde de la tarjeta (CAMBIABLE) */
+    border: 2px solid #28852d;   /* <-- cambia el color y grosor aquí */
+    /* Esquinas redondeadas */
+    border-radius: 15px;         /* <-- cambia el radio del borde aquí */
+    /* Sombra (puedes hacerla más fuerte, suave o quitarla) */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+    /* Espaciado interno */
+    padding: 1rem;
+    }
+
+    /* ===== CABECERA DE LA TARJETA ===== */
+    .perfil-header {
+    text-align: left;           /* pon "center" si la quieres centrada */
+    margin-bottom: 1rem;
+    }
+
+    .perfil-title {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333333;             /* color del título */
+    }
+
+    .perfil-subtitle {
+    font-size: 0.95rem;
+    color: #666666;             /* color del subtítulo (nombre del médico) */
+    }
+
+    /* ===== CONTENIDO ===== */
+    .perfil-content {
+    margin-top: 0.5rem;
+    }
+
+    /* Campo de formulario al 100% del ancho */
+    .full-width {
+    width: 100%;
+    }
+
+    /* Espaciado extra al mat-form-field si lo necesitas */
+    .perfil-field {
+    margin-bottom: 1rem;
+    }
+
+    /* Textarea (texto de descripción) */
+    .perfil-textarea {
+    /* Cambia el color del texto y del fondo del textarea */
+    color: #333333;
+    background-color: #f4edd9bd;
+    /* Bordes internos del textarea */
+    border-radius: 10px;
+    resize: vertical;           /* permitir redimensionar sólo verticalmente */
+    }
+
+    /* ===== BOTÓN GUARDAR ===== */
+    .perfil-button {
+    margin-top: 1rem;
+    padding: 0.7rem 1.5rem;
+    font-size: 1rem;
+    font-weight: 500;
+
+    /* Si quieres sobrescribir el color "primary" de Angular Material,
+        descomenta estas líneas y juega con los colores: */
+    /* background-color: #3f51b5;   */
+    /* color: #ffffff;              */
+    }
+
+    /* Efecto hover opcional para el botón */
+    .perfil-button:hover {
+    filter: brightness(0.95);
+    }
+
+        /* ===== QUITAR EL FONDO BLANCO DEL mat-form-field ===== */
+    /* Angular Material (MDC v15+). Pinta el wrapper del campo */
+    :host ::ng-deep .perfil-field .mat-mdc-text-field-wrapper {
+    background-color: #f4edd9bd;   /* ← cámbialo a lo que quieras (puede ser #f4edd9bd) */
+    border-radius: 10px;
+    border: 1px solid #28852d  ;
+    }
+
+    /* Que el overlay de foco no tape tu color */
+    :host ::ng-deep .perfil-field .mat-mdc-form-field-focus-overlay {
+    background-color: transparent;
+    }
+
+    /* Color de la línea inferior (reposo y foco) */
+    :host ::ng-deep .perfil-field .mdc-line-ripple::before {
+    background-color: #c0c0c0;   /* línea en reposo */
+    }
+    :host ::ng-deep .perfil-field .mdc-line-ripple::after {
+    background-color: #28852d;   /* línea al enfocar */
+    }
+
+    /* Color de la etiqueta flotante */
+    :host ::ng-deep .perfil-field .mat-mdc-floating-label {
+    color: #6f6f6f;
+    }
+
+    /* ===== COMPAT: versiones Material anteriores (no-MDC) ===== */
+    :host ::ng-deep .perfil-field .mat-form-field-flex {
+    background-color: #f7f7f7;
+    border-radius: 10px;
+    }
