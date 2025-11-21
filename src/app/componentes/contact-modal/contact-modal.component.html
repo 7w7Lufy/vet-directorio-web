@@ -1,17 +1,28 @@
-    <h2 mat-dialog-title>Información de Contacto</h2>
-    <mat-dialog-content>
-    <p>
+    <h2 mat-dialog-title class="modal-title"> Información de Contacto</h2>
+
+    <mat-dialog-content class="modal-content">
+    <p class="intro-text">
         Si deseas registrar tu clínica o tienes alguna pregunta, por favor contáctanos a través de:
     </p>
-        <ul>
-            <li><strong>Correo Electrónico:</strong> Lunafloresy&#64;gmail.com</li>
-            <li><strong>Teléfono:</strong> 55-1386-1161</li>
-        </ul>
-    <p>
-        ¡Gracias por tu interés!
+    
+    <ul class="contact-list">
+        <li>
+        <mat-icon>email</mat-icon>
+        <strong>Correo Electrónico:</strong> 
+        <a href="mailto:lunafloresy@gmail.com">Lunafloresy&#64;gmail.com</a>
+        </li>
+        <li>
+        <mat-icon>phone</mat-icon>
+        <strong>Teléfono:</strong> 
+        <span>55 1386 1161</span>
+        </li>
+    </ul>
+
+    <p class="outro-text">
+        ¡Gracias por tu interés en formar parte de nuestro directorio!
     </p>
     </mat-dialog-content>
 
     <mat-dialog-actions align="end">
-        <button mat-flat-button color="primary" mat-dialog-close>Cerrar</button>
+    <button mat-flat-button color="primary" mat-dialog-close>Cerrar</button>
     </mat-dialog-actions>

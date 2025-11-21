@@ -8,6 +8,7 @@ import { MaterialModule } from '../../material/material.module'; // <-- IMPORTA
 import { MatDialog } from '@angular/material/dialog'; // <-- IMPORTA MatDialog
 import { VetDetailModalComponent } from '../../componentes/vet-detail-modal/vet-detail-modal.component'; // <-- IMPORTA el modal
 import { UbicacionService } from '../../servicios/ubicacion.service';
+import { PrivacyModalComponent } from '../../componentes/privacy-modal/privacy-modal.component';
 
 
 @Component({
@@ -42,6 +43,22 @@ export class DirectorioComponent implements OnInit {
   ngOnInit(): void {
     this.buscar();
     this.cargarFiltros(); // Carga los datos para los dropdowns
+    this.mostrarAvisoPrivacidad();
+  }
+
+  mostrarAvisoPrivacidad() {
+    // Verifica si ya se mostró el aviso antes
+    const avisoVisto = localStorage.getItem('avisoPrivacidadVisto');
+    if (!avisoVisto) {
+      const dialogRef = this.dialog.open(PrivacyModalComponent, {
+        width: '500px',
+        disableClose: false // Permite cerrar haciendo clic fuera
+      });
+      // Cuando se cierre, guardamos en memoria que ya lo vio
+      dialogRef.afterClosed().subscribe(() => {
+        localStorage.setItem('avisoPrivacidadVisto', 'true');
+      });
+    }
   }
 
   cargarFiltros(): void {

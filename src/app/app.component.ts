@@ -3,11 +3,13 @@ import { Component, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { NavbarComponent } from './componentes/navbar/navbar.component';
 import { AuthService } from './servicios/auth.service'; // <-- IMPORTA AuthService
+import { FooterComponent } from './componentes/footer/footer.component';
+
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet,NavbarComponent],
+  imports: [RouterOutlet,NavbarComponent,FooterComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })

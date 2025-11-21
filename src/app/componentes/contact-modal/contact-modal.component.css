@@ -1,0 +1,126 @@
+/* =========================================
+   ESTILOS DEL TÍTULO DEL MODAL
+   ========================================= */
+.modal-title {
+  /* Color de fondo gris claro para el encabezado */
+  background-color: #e9ecef;
+  
+  /* Color del texto del título (Gris oscuro casi negro) */
+  color: #333;
+  
+  /* Espaciado interno. !important asegura que sobrescriba los estilos por defecto de Material */
+  padding: 1rem 1.5rem !important;
+  
+  /* Márgenes negativos: Esto hace que el título se estire hasta los bordes 
+     y cubra el padding por defecto que trae la ventana de diálogo */
+  margin: -24px -24px 0 -24px !important;
+  
+  /* Grosor de la letra */
+  font-weight: bold;
+  
+  /* Una línea sutil debajo del título para separarlo del contenido */
+  border-bottom: 1px solid #dee2e6;
+}
+
+/* =========================================
+   ESTILOS DEL CONTENIDO PRINCIPAL
+   ========================================= */
+.modal-content {
+  /* Espaciado interno para que el texto no toque los bordes */
+  padding: 1.5rem 2rem !important;
+  
+  /* Tamaño de la letra general */
+  font-size: 1rem;
+  
+  /* Altura de línea: hace que el texto sea más fácil de leer (más espacio entre renglones) */
+  line-height: 1.6;
+  
+  /* Color del texto general */
+  color: #333;
+}
+
+/* Estilo para el párrafo introductorio ("Si deseas registrar...") */
+.intro-text {
+  margin-bottom: 1.5rem; /* Espacio debajo del párrafo */
+}
+
+/* =========================================
+   ESTILOS DE LA LISTA DE CONTACTO
+   ========================================= */
+.contact-list {
+  list-style: none; /* Quita los puntos negros (bullets) de la lista */
+  padding: 0;       /* Quita la sangría automática de la lista */
+  margin: 0 0 1.5rem 0; /* Margen inferior para separar del texto de agradecimiento */
+}
+
+/* Estilo para cada fila de la lista (<li>) */
+.contact-list li {
+  display: flex;       /* Activa Flexbox: permite alinear el ícono junto al texto */
+  align-items: center; /* Centra verticalmente el ícono con el texto */
+  margin-bottom: 1rem; /* Espacio entre cada fila de contacto */
+  font-size: 1.05rem;  /* Un poquito más grande que el texto normal */
+}
+
+/* =========================================
+   ESTILOS DE LOS ÍCONOS (Email, Teléfono, Mapa)
+   ========================================= */
+.contact-list li mat-icon {
+  margin-right: 0.8rem; /* Espacio entre el ícono y el texto */
+  
+  /* AQUÍ CAMBIAS EL COLOR DE LOS ÍCONOS */
+  color: #007bff; /* Azul estándar. Puedes poner 'red', 'green', '#ff9900', etc. */
+}
+
+/* =========================================
+   ESTILOS DE LAS ETIQUETAS ("Correo:", "Teléfono:")
+   ========================================= */
+.contact-list li strong {
+  margin-right: 0.5rem; /* Espacio pequeño después de los dos puntos */
+  color: #555;          /* Un gris un poco más claro que el negro */
+}
+
+/* =========================================
+   ESTILOS DE LOS ENLACES (El correo clickeable)
+   ========================================= */
+.contact-list li a {
+  /* Color del enlace (usualmente igual que el ícono) */
+  color: #007bff;
+  
+  /* Quita la línea subrayada por defecto */
+  text-decoration: none;
+  
+  /* Hace la letra un poco más gruesa */
+  font-weight: 500;
+}
+
+/* Estilo cuando pasas el mouse por encima del enlace */
+.contact-list li a:hover {
+  text-decoration: underline; /* Añade el subrayado al pasar el mouse */
+}
+
+/* =========================================
+   ESTILOS DEL TEXTO FINAL ("Gracias por tu interés...")
+   ========================================= */
+.outro-text {
+  font-style: italic; /* Letra cursiva */
+  color: #666;        /* Color grisáceo */
+  text-align: center; /* Centrado en medio del modal */
+  margin-top: 1rem;   /* Espacio arriba */
+}
+
+/* =========================================
+   ESTILOS DE LA BARRA DE BOTONES (Abajo)
+   ========================================= */
+mat-dialog-actions {
+  /* Espaciado interno */
+  padding: 1rem 1.5rem !important;
+  
+  /* Color de fondo gris claro (igual que el título) para darle cierre visual */
+  background-color: #f8f9fa;
+  
+  /* Línea sutil arriba de los botones */
+  border-top: 1px solid #dee2e6;
+  
+  /* Quita márgenes extraños que a veces pone Angular Material */
+  margin-bottom: 0 !important;
+}

@@ -43,3 +43,15 @@ body {
 .error-snackbar .mat-mdc-button-base {
    color: white !important;
 }
+
+/* Hace que el body ocupe toda la altura */
+app-root {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+/* Hace que el contenido principal crezca para empujar el footer */
+.main-content {
+  flex: 1;
+}

@@ -1,0 +1,93 @@
+    .site-footer {
+    background-color: #333; /* Gris oscuro */
+    color: #fff;
+    padding: 3rem 1rem;
+    margin-top: auto; /* Empuja el footer al fondo si hay poco contenido */
+    }
+
+    .footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap; /* Para móviles */
+    gap: 2rem;
+    }
+
+    .footer-section {
+    flex: 1;
+    min-width: 250px;
+    }
+
+    .brand h3 {
+    margin-top: 0;
+    color: #4caf50; /* Un toque de verde */
+    }
+
+    .brand p {
+    font-size: 0.9rem;
+    color: #ccc;
+    }
+
+    .links h4, .social h4 {
+    border-bottom: 2px solid #4caf50;
+    display: inline-block;
+    margin-bottom: 1rem;
+    padding-bottom: 0.3rem;
+    }
+
+    .links ul {
+    list-style: none;
+    padding: 0;
+    }
+
+    .links ul li {
+    margin-bottom: 0.5rem;
+    }
+
+    .links ul li a {
+    color: #ccc;
+    text-decoration: none;
+    cursor: pointer;
+    transition: color 0.3s;
+    }
+
+    .links ul li a:hover {
+    color: #fff;
+    padding-left: 5px; /* Efecto de movimiento */
+    }
+
+    .social-icons {
+    display: flex;
+    gap: 1rem;
+    }
+
+    .social-icons a {
+    color: #333;
+    background-color: #ccc;
+    width: 35px;
+    height: 35px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border-radius: 50%;
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.8rem;
+    transition: background-color 0.3s;
+    }
+
+    .social-icons a:hover {
+    background-color: #fff;
+    }
+
+    /* Ajuste para móviles */
+    @media (max-width: 768px) {
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    .social-icons {
+        justify-content: center;
+    }
+    }
