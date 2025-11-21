@@ -10,6 +10,6 @@ export const appConfig: ApplicationConfig = {
     provideZoneChangeDetection({ eventCoalescing: true }), 
     provideRouter(routes),
     provideHttpClient(withInterceptors([authInterceptor])),
-    importProvidersFrom(NgxGoogleAnalyticsModule.forRoot('GTM-M67C99PW'))
+    importProvidersFrom(NgxGoogleAnalyticsModule.forRoot('G-SD263MGRC0'))
   ] 
 };
