@@ -55,3 +55,20 @@ app-root {
 .main-content {
   flex: 1;
 }
+
+
+/* Estilos para el modal tipo "Bottom Sheet" */
+.bottom-sheet-modal .mat-mdc-dialog-container {
+  /* Quita bordes redondeados inferiores */
+  border-bottom-left-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  /* Asegura que se pegue al fondo sin margen */
+  margin-bottom: 0 !important;
+}
+
+.bottom-sheet-modal .mat-mdc-dialog-surface {
+    border-radius: 8px 8px 0 0 !important; /* Redondea solo arriba */
+}
+
+/* Animación de deslizamiento (Angular Material ya tiene una por defecto, 
+   pero al poner position: bottom: 0 se siente natural) */

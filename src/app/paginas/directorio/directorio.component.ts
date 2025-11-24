@@ -51,9 +51,12 @@ export class DirectorioComponent implements OnInit {
     const avisoVisto = localStorage.getItem('avisoPrivacidadVisto');
     if (!avisoVisto) {
       const dialogRef = this.dialog.open(PrivacyModalComponent, {
-        width: '500px',
-        disableClose: false // Permite cerrar haciendo clic fuera
-      });
+      width: '100%', // Ocupa todo el ancho (o casi todo)
+      maxWidth: '100vw', // Asegura que no se limite
+      position: { bottom: '0' }, // <-- ESTO LO PONE ABAJO
+      panelClass: 'bottom-sheet-modal', // Clase CSS personalizada para la animación
+      disableClose: false
+    });
       // Cuando se cierre, guardamos en memoria que ya lo vio
       dialogRef.afterClosed().subscribe(() => {
         localStorage.setItem('avisoPrivacidadVisto', 'true');

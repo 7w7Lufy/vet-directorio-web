@@ -1,22 +1,49 @@
-    <div class="modal-header">
-        <h2 mat-dialog-title style="margin: 0;">Aviso de Privacidad</h2>
-        <button mat-icon-button mat-dialog-close aria-label="Cerrar">
-            <mat-icon>close</mat-icon>
-        </button>
+    <!-- Modal: Aviso de Privacidad (contenido completo embebido) -->
+    <div class="modal-header" role="heading" aria-level="2">
+    <h2 mat-dialog-title class="modal-title">Aviso de Privacidad</h2>
+    <button mat-icon-button mat-dialog-close aria-label="Cerrar">
+        <mat-icon>close</mat-icon>
+    </button>
     </div>
 
-    <mat-dialog-content class="modal-content">
-        <p>
-            <strong>Importante:</strong> La información mostrada en este directorio (nombres, cédulas, direcciones) es pública y ha sido recopilada con fines informativos para facilitar la búsqueda de servicios veterinarios.
-        </p>
-        <p>
-            Si usted es un médico veterinario y desea modificar, actualizar o eliminar su información de este directorio, por favor contáctenos a través de la sección de "Contacto" o inicie sesión para gestionar su perfil.
-        </p>
-        <p>
-            Nos comprometemos a proteger la integridad de sus datos profesionales.
-        </p>
+    <mat-dialog-content class="modal-content" tabindex="0" role="document" aria-label="Contenido del Aviso de Privacidad">
+    <p><strong>Responsable:</strong> Vets en Oaxaca — Yanh Mauricio Luna Flores.</p>
+    <p><strong>Contacto:</strong> <a href="mailto:lunafloresy&#64;gmail.com">lunafloresy&#64;gmail.com</a> · <a href="tel:+525513861161">55 1386 1161</a>.</p>
+
+    <h4>1) ¿Qué datos tratamos?</h4>
+    <ul>
+        <li><strong>Identificación y profesionales:</strong> nombre, correo, teléfono, <strong>número de cédula profesional</strong> (solo se publica el número; se conserva copia interna para verificación).</li>
+        <li><strong>Perfil público:</strong> fotos, descripción, servicios, horarios y direcciones de la clínica.</li>
+        <li><strong>Cuenta y seguridad:</strong> email, contraseña (hash), tokens de restablecimiento.</li>
+    </ul>
+
+    <h4>2) ¿Para qué usamos los datos?</h4>
+    <p><strong>Finalidades necesarias:</strong> administrar cuentas, publicar perfiles (con servicios, horarios y ubicación por enlace), y cumplir obligaciones legales. <strong>Finalidades opcionales:</strong> difusión y marketing con consentimiento.</p>
+
+    <h4>3) Lo importante sobre la publicación</h4>
+    <p>El <strong>número de cédula profesional</strong> <em>siempre</em> será visible en el perfil para garantizar la autenticidad del profesional. <br>
+    Si un médico desea no mostrar su <em>nombre real</em>, puede solicitar mostrar un <em>alias o nombre comercial</em>. También puede pedir ocultar fotos o ciertos datos de contacto; la cédula permanecerá pública.</p>
+
+    <h4>4) Opciones y Derechos (ARCO)</h4>
+    <p>Para solicitar ocultamiento, rectificación, acceso o eliminación, escriba a <a href="mailto:lunafloresy&#64;gmail.com">lunafloresy&#64;gmail.com</a> con asunto <strong>ARCO</strong>. Adjunte identificación. Responderemos conforme a la normativa.</p>
+
+    <h4>5) Transferencias y proveedores</h4>
+    <p>Podemos compartir datos con autoridades por requerimiento legal y con proveedores técnicos (hosting, base de datos, almacenamiento de imágenes). Estos proveedores están obligados contractualmente a proteger los datos.</p>
+
+    <h4>6) Seguridad y conservación</h4>
+    <p>Implementamos bcrypt para contraseñas, JWT para sesiones y TLS en las comunicaciones. Conservamos perfiles mientras la cuenta esté activa y hasta 5 años adicionales cuando exista obligación legal.</p>
+
+    <p class="small-note"><strong>Última actualización:</strong> 03/11/2025</p>
+
+    <hr />
+
+    <p class="download-note">
+        ¿Desea el aviso en PDF? <a href="/mnt/data/Aviso_Privacidad_Medicos_Vets_en_Oaxaca_ACTUALIZADO.pdf" target="_blank" rel="noopener">Abrir/Descargar aviso completo (PDF)</a>.
+        <!-- En producción cambie el href por la URL pública del PDF en su servidor -->
+    </p>
     </mat-dialog-content>
 
-    <mat-dialog-actions align="end">
-        <button mat-flat-button color="primary" mat-dialog-close>Entendido</button>
+    <mat-dialog-actions align="end" class="modal-actions">
+    <button mat-flat-button mat-dialog-close>Entendido</button>
+    <a mat-button color="accent" href="mailto:lunafloresy&#64;gmail.com">Contactar</a>
     </mat-dialog-actions>
